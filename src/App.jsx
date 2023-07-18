@@ -2,32 +2,24 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ProductGalary } from './components/ProductGalary'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const orderBy = ref('title')
+  function sortList(term){
+    orderBy.value = term;
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 class="title">Junk Food Corner</h1>
+      <h3>Please transfer money to Payton</h3>
+      <div class="orders">
+        <button onClick={sortList('Name')}>Title</button>
+        <button onClick={sortList('Type')}>Type</button>
+        <button onClick={sortList('Price')}>Price</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ProductGalary></ProductGalary>
     </>
   )
 }
