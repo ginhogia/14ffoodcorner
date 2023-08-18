@@ -2,7 +2,7 @@
 html {
   background-color: whitesmoke;
 }
-#app {
+#root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

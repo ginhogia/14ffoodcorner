@@ -101,11 +101,9 @@ function App() {
         }
     }
 ];
-//const [orderBy, setOrderBy] = useState("title");
-  const orderBy = "Name";
-  function sortList(term){
-    
-  }
+const [orderBy, setOrderBy] = useState("Name");
+
+
 
   return (
     <>
@@ -113,9 +111,9 @@ function App() {
       <h3>Please transfer money to Payton</h3>
       
       <div className="orders">
-        <button onClick={sortList('Name')}>Title</button>
-        <button onClick={sortList('Type')}>Type</button>
-        <button onClick={sortList('Price')}>Price</button>
+        <button onClick={()=>{setOrderBy('Name')}}>Title</button>
+        <button onClick={()=>{setOrderBy('Type')}}>Type</button>
+        <button onClick={()=>{setOrderBy('Price')}}>Price</button>
       </div>
       <ProductGalary orderBy= {orderBy} products={products}></ProductGalary>
     </>
