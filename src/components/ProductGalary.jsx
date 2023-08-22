@@ -16,6 +16,7 @@ const productItems = orderProducts.map(product =>
         <img src={product.fields.ImgUrl} style={{width:'90%'}} alt="product" />
         <p>{product.fields.Type}</p>
         <p>{product.fields.Price}</p>
+        <p>{product.fields.Status}</p>
     </div>
     </Flipped>
     );
