@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react'
+import { MagnifyingGlass } from 'react-loader-spinner'
 import './App.css'
 import { ProductGalary } from './components/ProductGalary'
 
 function App() {
-  
+
+const [onLoading, setLoadingStatus]= useState(true);
 const [products, setProducts] = useState([]);
 const key='patxSqkSlFgpoyeFw.d364bf30fa67683fbb6b9fe892c56948f9b7f0b6ae8959a9a30bedf7eafeb5f8';
 const baseId = 'appY7GVfIzY0KpUhT';
 const table = 'tbl9JVGGQhWWTEgag';
 const filterByFormula = 'Status!="下架"';
 useEffect(()=>{
+    //setLoadingStatus(true);
     fetch(`https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=${filterByFormula}`,
         {
           headers: {
@@ -17,7 +20,8 @@ useEffect(()=>{
           }
         })
       .then(response => response.json())
-      .then(data => setProducts(data.records));
+      .then(data => setProducts(data.records))
+      .then(setLoadingStatus(false));
 },[]);
 
 const [orderBy, setOrderBy] = useState("Name");
@@ -34,8 +38,12 @@ const [orderBy, setOrderBy] = useState("Name");
         <button onClick={()=>{setOrderBy('Type')}}>Type</button>
         <button onClick={()=>{setOrderBy('Price')}}>Price</button>
       </div>
+      
       <ProductGalary orderBy= {orderBy} products={products}></ProductGalary>
+      <MagnifyingGlass visible={onLoading} height="80" width="80" ariaLabel="MagnifyingGlass-loading" wrapperStyle={{}} wrapperClass="MagnifyingGlass-wrapper" glassColor = '#c0efff' color = '#e15b64' /> 
+        
     </>
+      
   )
 }
 
