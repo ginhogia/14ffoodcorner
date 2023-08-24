@@ -12,7 +12,7 @@ const baseId = 'appY7GVfIzY0KpUhT';
 const table = 'tbl9JVGGQhWWTEgag';
 const filterByFormula = 'Status!="下架"';
 useEffect(()=>{
-    //setLoadingStatus(true);
+    setLoadingStatus(true);
     fetch(`https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=${filterByFormula}`,
         {
           headers: {
@@ -21,7 +21,7 @@ useEffect(()=>{
         })
       .then(response => response.json())
       .then(data => setProducts(data.records))
-      .then(setLoadingStatus(false));
+      .finally(setLoadingStatus(false));
 },[]);
 
 const [orderBy, setOrderBy] = useState("Name");
