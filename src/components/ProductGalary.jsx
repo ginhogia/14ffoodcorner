@@ -13,7 +13,7 @@ const productItems = orderProducts.map(product =>
     <div key={product.id} className="product">
         <h1>{product.fields.Name}</h1>
         <p>{product.fields.Taste}</p>
-        <img src={product.fields.ImgUrl} style={{width:'90%'}} alt="product" />
+        <img src={product.fields.ImgUrl} style={{width:'90%'}} alt="no image" />
         <p>{product.fields.Type}</p>
         <p>{product.fields.Price}</p>
         <p>{product.fields.Status}</p>

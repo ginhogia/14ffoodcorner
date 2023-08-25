@@ -2,29 +2,42 @@ import { useEffect, useState } from 'react'
 import { MagnifyingGlass } from 'react-loader-spinner'
 import './App.css'
 import { ProductGalary } from './components/ProductGalary'
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore"; 
+
 
 function App() {
 
 const [onLoading, setLoadingStatus]= useState(true);
 const [products, setProducts] = useState([]);
-const key='patxSqkSlFgpoyeFw.d364bf30fa67683fbb6b9fe892c56948f9b7f0b6ae8959a9a30bedf7eafeb5f8';
-const baseId = 'appY7GVfIzY0KpUhT';
-const table = 'tbl9JVGGQhWWTEgag';
-const filterByFormula = 'Status!="下架"';
-useEffect(()=>{
-    setLoadingStatus(true);
-    fetch(`https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=${filterByFormula}`,
-        {
-          headers: {
-            Authorization: `Bearer ${key}`
-          }
-        })
-      .then(response => response.json())
-      .then(data => setProducts(data.records))
-      .finally(setLoadingStatus(false));
-},[]);
-
 const [orderBy, setOrderBy] = useState("Name");
+
+useEffect(()=>{
+  //load data
+    setLoadingStatus(true);
+      const firebaseConfig = {
+        apiKey: "AIzaSyAmskkd6FA-KzhFATIYCUgZ4smLOqkqA5c",
+        authDomain: "fcorner-4cfac.firebaseapp.com",
+        projectId: "fcorner-4cfac",
+        storageBucket: "fcorner-4cfac.appspot.com",
+        messagingSenderId: "206220235360",
+        appId: "1:206220235360:web:692ba41161d20a5d16e905",
+        measurementId: "G-5KG0KG0VGX"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+        const colRef = collection(db, "products");
+        const docSnap =getDocs(colRef)
+        .then(response=>{
+          let tempArr =[];
+          response.forEach((doc) =>{
+            tempArr.push(doc.data());
+          });
+          setProducts(tempArr);
+        })
+        .then(setLoadingStatus(false));
+},[]);
 
 
 
