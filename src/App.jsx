@@ -4,7 +4,7 @@ import './App.css'
 import { ProductGalary } from './components/ProductGalary'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, getDocs, query, where } from "firebase/firestore"; 
 
 
 function App() {
@@ -28,7 +28,8 @@ useEffect(()=>{
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
         const colRef = collection(db, "products");
-        const docSnap =getDocs(colRef)
+        const querySnapshot = query(colRef, where("fields.Status", 'not-in', ["下架"]));
+        const docSnap =getDocs(querySnapshot)
         .then(response=>{
           let tempArr =[];
           response.forEach((doc) =>{
