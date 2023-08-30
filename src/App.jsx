@@ -13,6 +13,8 @@ const [onLoading, setLoadingStatus]= useState(true);
 const [products, setProducts] = useState([]);
 const [orderBy, setOrderBy] = useState("Name");
 
+const [shopCart, setCartItem] = useState([]);
+
 useEffect(()=>{
   //load data
     setLoadingStatus(true);
