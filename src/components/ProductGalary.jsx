@@ -23,6 +23,15 @@ const GenImageStyle = function(status){
         }
     }
 
+const ProductStatus = function(price,status){
+    if (status === "缺貨"){
+        return (<p>{status}</p>);
+    }
+    else{
+        return (<p>${price}</p>);
+    }
+}
+
 
 const productItems = orderProducts.map(product =>
     <Flipped flipId={product.id} spring="veryGentle">
@@ -31,8 +40,7 @@ const productItems = orderProducts.map(product =>
         <p>{product.fields.Taste}</p>
         <img src={product.fields.ImgUrl} style={ GenImageStyle(product.fields.Status)} alt="no image" />
         <p>{product.fields.Type}</p>
-        <p>{product.fields.Price}</p>
-        <p>{product.fields.Status}</p>
+        {ProductStatus(product.fields.Price,product.fields.Status)}
     </div>
     </Flipped>
     );
