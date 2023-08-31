@@ -4,8 +4,6 @@
     justify-content: space-around;
   }
   .product {
-    height: 100%;
-    width: 40%;
     max-width: 200px;
     min-width: 150px;
     padding: 10px 0;
@@ -16,7 +14,13 @@
   }
   .product h1 {
     font-size: large;
+    height: 3em;
   }
+
+  .product img{
+    object-fit: contain;
+  }
+
   .sorter-move {
     transition: all 1s;
   }
