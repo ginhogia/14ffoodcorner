@@ -15,11 +15,7 @@ const orderProducts = products.sort(
 const GenImageStyle = function(status){
     if (status === "缺貨"){
         return {
-            filter: 'grayscale(1)',
-            width:'90%'};
-        }
-    else{
-        return {width:'90%'};
+            filter: 'grayscale(1)'};
         }
     }
 
@@ -37,10 +33,11 @@ const productItems = orderProducts.map(product =>
     <Flipped flipId={product.id} spring="veryGentle">
     <div key={product.id} className="product">
         <h1>{product.fields.Name}</h1>
-        <p>{product.fields.Taste}</p>
-        <img src={product.fields.ImgUrl} style={ GenImageStyle(product.fields.Status)} alt="no image" />
-        <p>{product.fields.Type}</p>
-        {ProductStatus(product.fields.Price,product.fields.Status)}
+        <div><p>{product.fields.Taste}</p></div>
+        <div><img src={product.fields.ImgUrl} style={ GenImageStyle(product.fields.Status)} alt="no image" /></div>
+        <div><p>{product.fields.Type}</p></div>
+        <div>{ProductStatus(product.fields.Price,product.fields.Status)}</div>
+        
     </div>
     </Flipped>
     );

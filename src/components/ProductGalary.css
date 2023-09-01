@@ -11,14 +11,22 @@
     box-shadow: lightslategray 0 1px 2px;
     border-radius: 10px;
     background-color: #fdfdfd;
+    display: grid;
+    grid-template-rows: 15% 10% 40% 15%;
   }
   .product h1 {
     font-size: large;
     height: 3em;
   }
 
+  
+
   .product img{
     object-fit: contain;
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .sorter-move {
