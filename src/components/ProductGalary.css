@@ -12,11 +12,10 @@
     border-radius: 10px;
     background-color: #fdfdfd;
     display: grid;
-    grid-template-rows: 15% 10% 40% 15%;
+    grid-template-rows: 12% 10% 40% 15%;
   }
   .product h1 {
     font-size: large;
-    height: 3em;
   }
 
   
