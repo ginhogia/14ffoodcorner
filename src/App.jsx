@@ -14,6 +14,19 @@ const [products, setProducts] = useState([]);
 const [orderBy, setOrderBy] = useState("Name");
 
 const [shopCart, setCartItem] = useState([]);
+const addToCart = (item, quanty) =>{
+  let targetIndex = shopCart.findIndex(e => e.id === item.id);
+  if( targetIndex >= 0 ){
+    shopCart[targetIndex].count += quanty;
+  }
+  else{
+    shopCart.push({
+      'id': item.id,
+      'product': item,
+      'count': quanty
+    })
+  }
+}
 
 useEffect(()=>{
   //load data
@@ -55,7 +68,7 @@ useEffect(()=>{
         <button onClick={()=>{setOrderBy('Price')}}>Price</button>
       </div>
       
-      <ProductGalary orderBy= {orderBy} products={products}></ProductGalary>
+      <ProductGalary orderBy= {orderBy} products={products} onCalculate={addToCart}></ProductGalary>
       <MagnifyingGlass visible={onLoading} height="80" width="80" ariaLabel="MagnifyingGlass-loading" wrapperStyle={{}} wrapperClass="MagnifyingGlass-wrapper" glassColor = '#c0efff' color = '#e15b64' /> 
         
     </>

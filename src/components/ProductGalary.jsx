@@ -3,7 +3,7 @@ import './ProductGalary.css';
 import {Flipper, Flipped } from "react-flip-toolkit";
 
 
-export const ProductGalary = function({orderBy, products}){
+export const ProductGalary = function({orderBy, products, onCalculate}){
 
 const orderProducts = products.sort(
     (a,b) => a.fields[orderBy] > b.fields[orderBy] ? 1: -1
@@ -28,10 +28,13 @@ const ProductStatus = function(price,status){
     }
 }
 
+const cartIncrement = (item) => {
+    onCalculate(item,1);
+}
 
 const productItems = orderProducts.map(product =>
     <Flipped flipId={product.id} spring="veryGentle">
-    <div key={product.id} className="product">
+    <div key={product.id} className="product" onClick={() => {cartIncrement(product)}}>
         <h1>{product.fields.Name}</h1>
         <div><p>{product.fields.Taste}</p></div>
         <div><img src={product.fields.ImgUrl} style={ GenImageStyle(product.fields.Status)} alt="no image" /></div>
