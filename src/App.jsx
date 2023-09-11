@@ -26,6 +26,7 @@ const addToCart = (item, quanty) =>{
       'count': quanty
     })
   }
+  setCartItem(shopCart);
 }
 
 useEffect(()=>{
