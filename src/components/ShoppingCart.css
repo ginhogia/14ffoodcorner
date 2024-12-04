@@ -24,6 +24,8 @@
     object-fit: cover;
     margin-right: 20px;
     border-radius: 4px;
+    mix-blend-mode: multiply;
+    background-color: #f0f0f0;
 }
 
 .item-details {

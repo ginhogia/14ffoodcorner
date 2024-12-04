@@ -29,7 +29,9 @@ const ProductStatus = function(price,status){
 }
 
 const cartIncrement = (item) => {
-    onCalculate(item,1);
+    if (item.fields.Status !== "缺貨") {
+        onCalculate(item, 1);
+    }
 }
 
 const productItems = orderProducts.map(product =>
