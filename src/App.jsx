@@ -5,6 +5,7 @@ import { ProductGalary } from './components/ProductGalary'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, query, where } from "firebase/firestore"; 
+import { ShoppingCart } from './components/ShoppingCart'
 
 
 function App() {
@@ -14,19 +15,26 @@ const [products, setProducts] = useState([]);
 const [orderBy, setOrderBy] = useState("Name");
 
 const [shopCart, setCartItem] = useState([]);
-const addToCart = (item, quanty) =>{
-  let targetIndex = shopCart.findIndex(e => e.id === item.id);
-  if( targetIndex >= 0 ){
-    shopCart[targetIndex].count += quanty;
-  }
-  else{
-    shopCart.push({
-      'id': item.id,
-      'product': item,
-      'count': quanty
-    })
-  }
-  setCartItem(shopCart);
+const addToCart = (item, quanty) => {
+  setCartItem(prevCart => {
+    const newCart = [...prevCart];
+    let targetIndex = newCart.findIndex(e => e.id === item.id);
+    
+    if (targetIndex >= 0) {
+      newCart[targetIndex] = {
+        ...newCart[targetIndex],
+        count: newCart[targetIndex].count + quanty
+      };
+    } else {
+      newCart.push({
+        'id': item.id,
+        'product': item,
+        'count': quanty
+      });
+    }
+    
+    return newCart;
+  });
 }
 
 useEffect(()=>{
@@ -69,7 +77,8 @@ useEffect(()=>{
         <button onClick={()=>{setOrderBy('Price')}}>Price</button>
       </div>
       
-      <ProductGalary orderBy= {orderBy} products={products} onCalculate={addToCart}></ProductGalary>
+      <ProductGalary orderBy={orderBy} products={products} onCalculate={addToCart}></ProductGalary>
+      <ShoppingCart cart={shopCart} updateCart={setCartItem} />
       <MagnifyingGlass visible={onLoading} height="80" width="80" ariaLabel="MagnifyingGlass-loading" wrapperStyle={{}} wrapperClass="MagnifyingGlass-wrapper" glassColor = '#c0efff' color = '#e15b64' /> 
         
     </>
